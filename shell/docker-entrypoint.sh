@@ -5,6 +5,7 @@ echo ========== Start Installation ==========
 
 
 echo ========== Create User ===========
+groupadd    ldapadmin
 useradd     ldapadmin 
 passwd      ldapadmin
 

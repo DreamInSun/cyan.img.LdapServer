@@ -17,9 +17,9 @@ ADD etc         /etc
 RUN yum install -y 389-ds openldap-clients
 
 #========== Expose ==========
-EXPOSE 389
-EXPOSE 636
-EXPOSE 9830
+EXPOSE ["389", "636", "9830"]
+#EXPOSE 636
+#EXPOSE 9830
 
 #========= Initialiaze Shell ==========
 ADD shell /shell
