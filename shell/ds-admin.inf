@@ -1,4 +1,4 @@
-#General.FullMachineName=
+General.FullMachineName=ldap.17orange.com
 slapd.ServerPort=389  
 General.ConfigDirectoryLdapURL=dc=17orange,dc=com
 General.ConfigDirectoryAdminID=admin
