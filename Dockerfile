@@ -26,4 +26,5 @@ ADD shell /shell
 RUN chmod a+x /shell/*
 
 #========== Entry Point ==========
-ENTRYPOINT ["/shell/docker-entrypoint.sh"]
+RUN /shell/docker-entrypoint.sh
+#ENTRYPOINT ["/shell/docker-entrypoint.sh"]
