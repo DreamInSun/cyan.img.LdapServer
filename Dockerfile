@@ -10,22 +10,20 @@ ADD rpm /rpm
 RUN rpm -Uvh /rpm/epel-release-6-8.noarch.rpm
 RUN rpm -Uvh /rpm/remi-release-6.rpm
 
-#========== Install 389 DS ==========
-
-
-
 #========== Edit Config ==========
-RUN echo ulimit -n 8192 >> /etc/profile
-RUN echo session    required     /lib/security/pam_limits.so >> /etc/pam.d/login
-#RUN useradd ldapadmin & passwd ldapadmin
+ADD etc         /etc
 
 #========== Install 389 DirSrv ==========
 RUN yum install -y 389-ds openldap-clients
-#RUN setup-ds-admin.pl
 
 #========== Expose ==========
 EXPOSE 389
 EXPOSE 636
 EXPOSE 9830
 
+#========= Initialiaze Shell ==========
+ADD shell /shell
+RUN chmod a+x /shell/*
+
 #========== Entry Point ==========
+ENTRYPOINT ["/shell/docker-entrypoint.sh"]
