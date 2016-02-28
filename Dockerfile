@@ -27,4 +27,5 @@ RUN chmod a+x /shell/*
 
 #========== Entry Point ==========
 RUN /shell/docker-entrypoint.sh
+RUN cat /tmp/setup*.log
 #ENTRYPOINT ["/shell/docker-entrypoint.sh"]
