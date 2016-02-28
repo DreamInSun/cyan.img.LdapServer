@@ -10,7 +10,7 @@ passwd      ldapadmin
 
 echo ========== Setup DS Admin ==========
 setup-ds-admin.pl --version
-setup-ds-admin.pl --file=/shell/ds-admin.inf
+setup-ds-admin.pl --silent --file=/shell/ds-admin.inf  
 
 echo ========== Start Apache2 ==========
  
