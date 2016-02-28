@@ -12,9 +12,9 @@ General.SuiteSpotUserID=ldapadmin
 
 #admin.SysUser=
 admin.Port=9830
-#admin.ServerIpAddress=
-#admin.ServerAdminID=
-#admin.ServerAdminPwd=123456
+admin.ServerIpAddress=ldap.17orange.com
+admin.ServerAdminID=admin
+admin.ServerAdminPwd=123456
 
 
 
