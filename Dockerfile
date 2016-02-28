@@ -17,7 +17,7 @@ RUN rpm -Uvh /rpm/remi-release-6.rpm
 #========== Edit Config ==========
 RUN echo ulimit -n 8192 >> /etc/profile
 RUN echo session    required     /lib/security/pam_limits.so >> /etc/pam.d/login
-RUN useradd ldapadmin & passwd ldapadmin
+#RUN useradd ldapadmin & passwd ldapadmin
 
 #========== Install 389 DirSrv ==========
 RUN yum install -y 389-ds openldap-clients
