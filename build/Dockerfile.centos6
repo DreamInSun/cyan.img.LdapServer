@@ -1,34 +1,41 @@
 # Version 1.0.0
-# cyan.org.LdapServer
+# cyan.img.Lamp
 
 #========== Basic Image ==========
-From centos:7
+From centos:6.7
 MAINTAINER "DreamInSun"
 
 
 #========== Evironment ==========
 ENV LDAP_ADMIN_USER		ldapadmin
 ENV LDAP_ADMIN_PASSWD	ldapadmin
-
-ENV LDAP_URL			dc=ecoho,dc=cn	
-ENV LDAP_SERVER_DOMAIN	ldap.ecoho.cn
-
 ENV ADMIN_USER			admin
 ENV ADMIN_PASSWD		123456
-
+ENV SERVER
 
 #========== Install EPEL & REMI ==========
-ADD rpm /rpm 
-RUN rpm --import /rpm/RPM-GPG-KEY-EPEL-7
-RUN yum localinstall -y /rpm/epel-release-7-*.noarch.rpm
-RUN rm -rf /rpm
+ADD rpm /rpm
+RUN rpm -Uvh /rpm/epel-release-6-8.noarch.rpm
+RUN rpm -Uvh /rpm/remi-release-6.rpm
+
+RUN rm -rf /rpm/
+
+
+wget http://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-7
+
+wget http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-5.noarch.rpm
+
+sudo rpm --import RPM-GPG-KEY-EPEL-7
+
+sudo yum localinstall epel-release-7-5.noarch.rpm
 
 #========== Edit Config ==========
-#ADD etc         /etc
+ADD etc         /etc
 
-#========== Install 389 DirSrv ========== 
-sudo yum install -y 389-ds-base 389-admin
-sudo yum install -y idm-console-framework 389-adminutil 389-admin 389-admin-console 389-console 389-ds-console
+#========== Install 389 DirSrv ==========
+RUN yum install -y 389-ds openldap-clients
+
+sudo yum install 389-ds-base 389-admin
 
 #========== Expose ==========
 EXPOSE 389

@@ -1,5 +1,5 @@
 # Version 1.0.0
-# cyan.org.LdapServer
+# cyan.img.Lamp
 
 #========== Basic Image ==========
 From centos:7
@@ -18,17 +18,19 @@ ENV ADMIN_PASSWD		123456
 
 
 #========== Install EPEL & REMI ==========
-ADD rpm /rpm 
-RUN rpm --import /rpm/RPM-GPG-KEY-EPEL-7
-RUN yum localinstall -y /rpm/epel-release-7-*.noarch.rpm
-RUN rm -rf /rpm
+ADD rpm /rpm
+WORKDIR /rpm
+RUN rpm --import RPM-GPG-KEY-EPEL-7
+RUN yum localinstall -y epel-release-7-*.noarch.rpm
+RUN rm -rf /rpm/
 
 #========== Edit Config ==========
-#ADD etc         /etc
+ADD etc         /etc
 
-#========== Install 389 DirSrv ========== 
-sudo yum install -y 389-ds-base 389-admin
-sudo yum install -y idm-console-framework 389-adminutil 389-admin 389-admin-console 389-console 389-ds-console
+#========== Install 389 DirSrv ==========
+RUN yum install -y 389-ds openldap-clients
+
+sudo yum install 389-ds-base 389-admin
 
 #========== Expose ==========
 EXPOSE 389

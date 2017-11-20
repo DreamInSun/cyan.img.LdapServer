@@ -2,6 +2,13 @@
 
 
 echo ========== Start Installation ==========
+export LDAP_ADMIN_USER=ldapadmin
+export LDAP_ADMIN_PASSWD=ldapadmin
+export LDAP_URL='dc=ecoho,dc=cn'	
+export LDAP_SERVER_DOMAIN=ldap.ecoho.cn
+export ADMIN_USER=admin
+export ADMIN_PASSWD=123456
+
 echo LDAP_ADMIN_USER = $LDAP_ADMIN_USER
 echo LDAP_ADMIN_PASSWD = $LDAP_ADMIN_PASSWD
 echo LDAP_URL = $LDAP_URL
@@ -17,6 +24,7 @@ passwd      $LDAP_ADMIN_PASSWD
 
 echo ========== Prepare Setup Configuration File ==========
 
+
 sed -i 's/{LDAP_ADMIN_USER}/'$LDAP_ADMIN_USER'/g' 			/shell/ds-admin.inf 
 sed -i 's/{LDAP_ADMIN_PASSWD}/'$LDAP_ADMIN_PASSWD'/g' 		/shell/ds-admin.inf 
 sed -i 's/{LDAP_URL}/'$LDAP_URL'/g' 							/shell/ds-admin.inf 
@@ -25,25 +33,3 @@ sed -i 's/{ADMIN_USER}/'$ADMIN_USER'/g' 						/shell/ds-admin.inf
 sed -i 's/{ADMIN_PASSWD}/'$ADMIN_PASSWD'/g' 					/shell/ds-admin.inf 
 
 cat /shell/ds-admin.inf 
-
-
-echo ========== Setup DS Admin ==========
-setup-ds-admin.pl --version
-setup-ds-admin.pl --silent --file=/shell/ds-admin.inf  
-cat /tmp/setup*.log
-
-echo ========== Start LDAP Server ==========
-# To start or stop directory server use >start-dirsrv >stop-dirsrv
-# To start or stop directory server admin use >start-ds-admin >stop-ds-admin
-# You can locate important configuration files @/etc/dirsrv/
-# You can locate related log files @/var/log/dirsrv
-
-start-dirsrv
-start-ds-admin
-
-service dirsrv status
-service dirsrv-admin status
-
-ls /var/log/dirsrv
-#tailf /var/log/dirsrv
-
